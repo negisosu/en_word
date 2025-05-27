@@ -21,7 +21,7 @@ export default function LP() {
                     <SignedOut>
                         <div className="space-x-4">
                             <Button asChild variant={"outline"}>
-                                <SignInButton>
+                                <SignInButton forceRedirectUrl={"/dashboard"}>
                                     Googleでログイン
                                 </SignInButton>
                             </Button>
@@ -48,7 +48,7 @@ export default function LP() {
                         </Link>
                         <SignedOut>
                             <Button asChild variant={"outline"} className="text-lg px-8">
-                                <SignInButton>
+                                <SignInButton forceRedirectUrl={"/dashboard"}>
                                     Googleでログイン
                                 </SignInButton>
                             </Button>
