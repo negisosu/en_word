@@ -7,6 +7,7 @@ import {
   Map,
   PieChart,
   Settings,
+  LogOut
 } from "lucide-react"
 
 import {
@@ -20,8 +21,7 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from "@/components/ui/sidebar"
-import { SignOutButton, UserButton } from "@clerk/nextjs"
-import { Button } from "./ui/button"
+import { UserButton, useClerk } from "@clerk/nextjs"
 import Link from "next/link"
 
 // メインナビゲーション項目
@@ -56,6 +56,9 @@ const data = {
 console.log(data)
 
 export function DashboardSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+
+  const { signOut } = useClerk()
+
   return (
     <Sidebar collapsible="icon" {...props}>
 
@@ -86,21 +89,20 @@ export function DashboardSidebar({ ...props }: React.ComponentProps<typeof Sideb
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
+            <SidebarMenuItem>
+              <SidebarMenuButton className="text-red-500 hover:text-red-500" onClick={() => signOut()}>
+                <LogOut/>
+                <span>ログアウト</span>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
           </SidebarMenu>
         </SidebarGroup>
       </SidebarContent>
 
       <SidebarFooter>
         <SidebarMenu>
-          <SidebarMenuItem className="flex">
+          <SidebarMenuItem>
             <UserButton/>
-            <div className="flex items-center justify-center w-full">
-                <Button asChild variant={"outline"} className="border-red-500 text-red-500 hover:text-red-500">
-                    <SignOutButton>
-                        ログアウト
-                    </SignOutButton>
-                </Button>
-            </div>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarFooter>

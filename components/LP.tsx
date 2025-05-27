@@ -47,7 +47,7 @@ export default function LP() {
                             </Button>
                         </Link>
                         <SignedOut>
-                            <Button asChild variant={"outline"} className="text-lg px-8">
+                            <Button asChild variant={"outline"} size="lg" className="hidden sm:block text-lg px-8">
                                 <SignInButton forceRedirectUrl={"/dashboard"}>
                                     Googleでログイン
                                 </SignInButton>

@@ -4,7 +4,7 @@ import { Separator } from "@/components/ui/separator"
 import { DashboardSidebar } from "@/components/DashboardSidebar"
 import { MyBreadcrumb } from "@/components/MyBreadcrumb"
 import { currentUser } from "@clerk/nextjs/server"
-import { isUserExist } from "@/lib/action"
+import { isUserExist } from "@/lib/isUserExist"
 import { redirect } from "next/navigation"
 
 export default async function DashboardLayout({
@@ -13,18 +13,14 @@ export default async function DashboardLayout({
   children: React.ReactNode
 }) {
 
+  //ユーザーの新規登録を認識する処理
   const user = await currentUser()
-
   if(!user){
     redirect("/")
   }
 
   const dbUser = await isUserExist(user.id)
-
-  console.log(dbUser)
-
   if(!dbUser){
-    console.log("User not registration")
     redirect("/onboarding")
   }
 
