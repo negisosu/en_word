@@ -4,10 +4,10 @@ import { useActionState } from "react";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./ui/card";
 import { Input } from "./ui/input";
-import { Label } from "./ui/Label"
-import { createUser } from "@/lib/action";
+import { Label } from "./ui/label"
+import { createUser } from "@/lib/actions/user";
 import { useUser } from "@clerk/nextjs";
-import { initialState } from "@/lib/schemas";
+import { initialState } from "@/lib/validators/userSchema";
 
 export function OnboardingForm() {
 

@@ -4,8 +4,8 @@ import { Separator } from "@/components/ui/separator"
 import { DashboardSidebar } from "@/components/DashboardSidebar"
 import { MyBreadcrumb } from "@/components/MyBreadcrumb"
 import { currentUser } from "@clerk/nextjs/server"
-import { isUserExist } from "@/lib/isUserExist"
 import { redirect } from "next/navigation"
+import { isUserExist } from "@/lib/actions/user"
 
 export default async function DashboardLayout({
   children,
