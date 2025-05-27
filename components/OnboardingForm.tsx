@@ -17,12 +17,12 @@ export function OnboardingForm() {
 
     return(
         <form action={formAction}>
-        <Card className="w-80">
-            <CardHeader className="space-y-4">
-                <CardTitle className="text-center">
+        <Card className="w-80 sm:w-96">
+            <CardHeader className="space-y-4 sm:space-y-8">
+                <CardTitle className="text-center text-lg sm:text-xl">
                     ユーザー新規登録
-                    </CardTitle>
-                <CardDescription>
+                </CardTitle>
+                <CardDescription className="text-center text-xs sm:text-sm">
                     サービスを開始するために、あなたのお名前を教えてください
                 </CardDescription>
             </CardHeader>
@@ -33,7 +33,7 @@ export function OnboardingForm() {
                 name="id"
                 defaultValue={user?.id}
                 />
-                <Label htmlFor="name" className="my-2 text-sm">
+                <Label htmlFor="name" className="my-2 sm:my-4">
                     名前
                 </Label>
                 <Input
@@ -42,6 +42,7 @@ export function OnboardingForm() {
                 name="name"
                 placeholder="ユーザーネーム"
                 autoComplete="off"
+                className="text-sm sm:text-lg"
                 />
                 {state.errors && Array.isArray(state.errors) && state.errors
                     .filter(error => error.path[0] === 'name')
@@ -56,7 +57,7 @@ export function OnboardingForm() {
                 />
         </CardContent>
             <CardFooter>
-                <Button type="submit" className="w-full">
+                <Button type="submit" className="w-full text-sm sm:text-lg">
                     登録
                 </Button>
             </CardFooter>
