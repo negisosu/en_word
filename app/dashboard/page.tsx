@@ -1,8 +1,10 @@
+import { DashboardWordForm } from "@/components/DashboardWordForm";
+
 export default function Page() {
 
     return(
         <div>
-            dashboard
+            <DashboardWordForm className="w-full"/>
         </div>
     )
 }
