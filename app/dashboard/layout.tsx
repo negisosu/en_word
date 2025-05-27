@@ -3,12 +3,31 @@ import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/s
 import { Separator } from "@/components/ui/separator"
 import { DashboardSidebar } from "@/components/DashboardSidebar"
 import { MyBreadcrumb } from "@/components/MyBreadcrumb"
+import { currentUser } from "@clerk/nextjs/server"
+import { isUserExist } from "@/lib/action"
+import { redirect } from "next/navigation"
 
-export default function DashboardLayout({
+export default async function DashboardLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+
+  const user = await currentUser()
+
+  if(!user){
+    redirect("/")
+  }
+
+  const dbUser = await isUserExist(user.id)
+
+  console.log(dbUser)
+
+  if(!dbUser){
+    console.log("User not registration")
+    redirect("/onboarding")
+  }
+
   return (
     <SidebarProvider>
       <DashboardSidebar/>
