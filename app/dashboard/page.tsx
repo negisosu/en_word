@@ -15,6 +15,10 @@ export default async function Page() {
 
     const wordSets = await getUserWordSets(userId)
 
+    if(!wordSets){
+        redirect("/")
+    }
+
     return(
         <div>
             <MyTitle>
