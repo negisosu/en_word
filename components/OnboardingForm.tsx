@@ -13,7 +13,7 @@ export function OnboardingForm() {
 
     const { user } = useUser()
 
-    const [state, formAction] = useActionState(createUser, initialState)
+    const [state, formAction, isPending] = useActionState(createUser, initialState)
 
     return(
         <form action={formAction}>
@@ -57,7 +57,7 @@ export function OnboardingForm() {
                 />
         </CardContent>
             <CardFooter>
-                <Button type="submit" className="w-full text-sm sm:text-lg">
+                <Button type="submit" className="w-full text-sm sm:text-lg" disabled={isPending}>
                     登録
                 </Button>
             </CardFooter>

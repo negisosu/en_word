@@ -40,7 +40,7 @@ export const createDefaultWordSet = async (userId: string) => {
     try{
         await prisma.wordSet.create({
             data: {
-                name: "",
+                name: "最初の単語帳",
                 description: "",
                 userId: userId,
             }
