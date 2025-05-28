@@ -2,15 +2,17 @@
 
 import { revalidatePath } from "next/cache"
 import { prisma } from "../prisma"
-import { CreateWord, createWordState } from "../validators/wordSchema"
+import { CreateWordSet, createWordSetState } from "../validators/wordSetSchema"
 import { redirect } from "next/navigation"
 
-export const getUserWordSets = async (userId: string) => {
+export const getUserWordSets = async (userId: string, limit: number = 100, skip: number = 1) => {
     try{
         const wordSets = await prisma.wordSet.findMany({
             where: {
                 userId: userId
-            }
+            },
+            skip: (skip - 1) * limit,
+            take: limit
         })
         return wordSets
     }catch(err){
@@ -19,31 +21,34 @@ export const getUserWordSets = async (userId: string) => {
     }
 }
 
-export const createWord = async (prevState: createWordState, formData: FormData) => {
-    const validatedFields = CreateWord.safeParse({
-        ja: formData.get("ja"),
-        en: formData.get("en"),
-        wordSetId: formData.get("wordSetId"),
+export const createWordSet = async (prevState: createWordSetState, formData: FormData) => {
+    const validatedFields = CreateWordSet.safeParse({
+        name: formData.get("name"),
+        description: formData.get("description"),
+        userId: formData.get("userId")
     })
 
     if(!validatedFields.success){
         return {
             errors: validatedFields.error.issues,
-            message: "単語の作成に失敗しました。"
+            message: "単語帳の作成に失敗しました"
         }
     }
 
+    let wordSetId = ""
+
     try{
-        await prisma.word.create({
+        const wordSet = await prisma.wordSet.create({
             data: validatedFields.data
         })
+        wordSetId = wordSet.id
     }catch(err){
         console.error(err)
         return {
-            message: "単語の作成に失敗しました"
+            message: "単語帳の作成に失敗しました"
         }
     }
 
-    revalidatePath("/dashboard")
-    redirect("/dashboard")
+    revalidatePath(`/dashboard/word-set/${wordSetId}`)
+    redirect(`/dashboard/word-set/${wordSetId}`)
 }

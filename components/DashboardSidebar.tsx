@@ -1,13 +1,9 @@
 "use client"
 
-import type * as React from "react"
 import {
-  Frame,
-  Home,
-  Map,
-  PieChart,
   Settings,
-  LogOut
+  LogOut,
+  Plus
 } from "lucide-react"
 
 import {
@@ -23,39 +19,14 @@ import {
 } from "@/components/ui/sidebar"
 import { UserButton, useClerk } from "@clerk/nextjs"
 import Link from "next/link"
+import { wordSetType } from "@/lib/validators/wordSetSchema"
+import { Sheet, SheetTrigger } from "./ui/sheet"
+import { useState } from "react"
+import { WordSetForm } from "./WordSetForm"
 
-// メインナビゲーション項目
-const data = {
-  navMain: [
-    {
-      title: "ダッシュボード",
-      url: "/dashboard",
-      icon: Home,
-      isActive: true,
-    },
-  ],
-  projects: [
-    {
-      name: "プロジェクト A",
-      url: "/dashboard/projects/project-a",
-      icon: Frame,
-    },
-    {
-      name: "プロジェクト B",
-      url: "/dashboard/projects/project-b",
-      icon: PieChart,
-    },
-    {
-      name: "プロジェクト C",
-      url: "/dashboard/projects/project-c",
-      icon: Map,
-    },
-  ],
-}
+export function DashboardSidebar({ wordSets, ...props }: React.ComponentProps<typeof Sidebar> & { wordSets: wordSetType[] }) {
 
-console.log(data)
-
-export function DashboardSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const [createWordSetIsOpen, setCreateWordSetIsOpen] = useState(false)
 
   const { signOut } = useClerk()
 
@@ -67,6 +38,17 @@ export function DashboardSidebar({ ...props }: React.ComponentProps<typeof Sideb
         <SidebarGroup>
           <SidebarGroupLabel>メニュー</SidebarGroupLabel>
           <SidebarMenu>
+            <SidebarMenuItem>
+              <Sheet open={createWordSetIsOpen} onOpenChange={setCreateWordSetIsOpen}>
+                <SheetTrigger asChild>
+                  <SidebarMenuButton>
+                    <Plus/>
+                    <span>単語帳を作成</span>
+                  </SidebarMenuButton>
+                </SheetTrigger>
+                <WordSetForm/>
+              </Sheet>
+            </SidebarMenuItem>
           </SidebarMenu>
         </SidebarGroup>
 
@@ -74,7 +56,21 @@ export function DashboardSidebar({ ...props }: React.ComponentProps<typeof Sideb
         <SidebarGroup className="group-data-[collapsible=icon]:hidden">
           <SidebarGroupLabel>単語帳</SidebarGroupLabel>
           <SidebarMenu>
+            {wordSets.map((wordSet) => (
+              <SidebarMenuItem key={wordSet.id}>
+                <SidebarMenuButton asChild>
+                  <Link href={`/dashboard/word-set/${wordSet.id}`}>
+                    <span>{wordSet.name}</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            ))}
           </SidebarMenu>
+          <SidebarGroupLabel>
+              <Link href={"/dashboard/word-set"} className="w-full py-2 rounded-lg hover:bg-gray-100">
+                <span>もっと見る→</span>
+              </Link>
+          </SidebarGroupLabel>
         </SidebarGroup>
 
         {/* 設定 */}
@@ -99,6 +95,7 @@ export function DashboardSidebar({ ...props }: React.ComponentProps<typeof Sideb
         </SidebarGroup>
       </SidebarContent>
 
+      {/*Clerkの認証情報 */}
       <SidebarFooter>
         <SidebarMenu>
           <SidebarMenuItem>

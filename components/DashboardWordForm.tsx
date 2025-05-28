@@ -7,20 +7,21 @@ import { Input } from "./ui/input"
 import { Label } from "./ui/label"
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "./ui/select"
 import { useActionState, useEffect, useState } from "react"
-import { createWord } from "@/lib/actions/wordSet"
 import {  initialState } from "@/lib/validators/wordSchema"
 import { useDebounce } from "use-debounce"
 import { Checkbox } from "./ui/checkbox"
+import { createDashboardWord } from "@/lib/actions/word"
 
 export function DashboardWordForm({ wordSets, ...props }: React.ComponentProps<typeof Card> & { wordSets: wordSetType[] }){
 
-    const [state, formAction, isPending] = useActionState(createWord, initialState)
+    const [state, formAction, isPending] = useActionState(createDashboardWord, initialState)
     const [isAutoTranslate, setIsAutoTranslate] = useState<boolean>(true)
     const [enText, setEnText] = useState("")
     const [jaText, setJaText] = useState("")
     const [jaTextPlaceholder, setJaTextPlaceholder] = useState("例：こんにちは")
     const [debounced] = useDebounce(enText, 500)
 
+    //翻訳処理のuseEffect
     useEffect(() => {
         const handleTranslate = async () => {
             const res = await fetch("/api/translate", {
@@ -117,7 +118,7 @@ export function DashboardWordForm({ wordSets, ...props }: React.ComponentProps<t
                         {state?.errors && Array.isArray(state.errors) && state.errors
                         .filter(error => error.path[0] === "ja" || error.path[0] === "en")
                         .map((error, index) => (
-                            <p key={index} className="my-2 text-sm text-red-500">{error.message}</p>
+                            <p key={index} className="my-2 text-sm text-red-500">{error.path[0] === "ja" && "日本語"}{error.path[0] === "en" && "英語"}:{error.message}</p>
                         ))}
                     </div>
                 </CardContent>

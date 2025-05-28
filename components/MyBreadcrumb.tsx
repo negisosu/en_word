@@ -13,17 +13,19 @@ export function MyBreadcrumb() {
     return(
         <Breadcrumb>
             <BreadcrumbList>
-            {splitPathname.map((path, i) => {
+            {
+            splitPathname.map((path, i) => {
                 return(<React.Fragment key={i}>
                     <BreadcrumbItem>
-                        <BreadcrumbLink href={path == "" ? "/" : path}>
+                        <BreadcrumbLink href={path == "" ? "/" : splitPathname.slice(0, i + 1).join("/")}>
                             {path == "" ? "/" : path}
                         </BreadcrumbLink>
                     </BreadcrumbItem>
                     {splitPathname.length != i + 1 && <BreadcrumbSeparator/>}
                 </React.Fragment>
                 )
-            })}
+            })
+            }
             </BreadcrumbList>
         </Breadcrumb>
     )
