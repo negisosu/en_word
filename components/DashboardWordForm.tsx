@@ -15,7 +15,7 @@ import { Plus } from "lucide-react"
 import { Sheet, SheetTrigger } from "./ui/sheet"
 import { WordSetForm } from "./WordSetForm"
 
-export function DashboardWordForm({ wordSets, ...props }: React.ComponentProps<typeof Card> & { wordSets: wordSetType[] }){
+export function DashboardWordForm({ wordSets }: { wordSets: wordSetType[] }){
 
     const [state, formAction, isPending] = useActionState(createDashboardWord, initialState)
     const [isAutoTranslate, setIsAutoTranslate] = useState<boolean>(true)
@@ -74,7 +74,7 @@ export function DashboardWordForm({ wordSets, ...props }: React.ComponentProps<t
 
     return(
         <form action={formAction}>
-            <Card {...props}>
+            <Card className="w-full">
                 <CardHeader>
                     <CardTitle className="text-lg sm:text-xl">
                         新しい単語を追加
