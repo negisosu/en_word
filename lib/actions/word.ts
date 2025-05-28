@@ -76,3 +76,13 @@ export const deleteWord = async (wordId: string) => {
         throw new Error("単語の削除に失敗しました")
     }
 }
+
+export const getRandomWords = async (wordSetId: string) => {
+    try{
+        const words = await prisma.$queryRaw<{id: string; en: string; ja: string; wordSetId: string }[]>`SELECT en, ja FROM "Word" WHERE "wordSetId" = ${wordSetId} ORDER BY RANDOM() LIMIT 100`
+        return words
+    }catch(err){
+        console.error(err)
+        throw err
+    }
+}

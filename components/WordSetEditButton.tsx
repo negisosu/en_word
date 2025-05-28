@@ -10,7 +10,7 @@ import { Button } from "./ui/button";
 import { PencilLine } from "lucide-react";
 import { deleteWordSet, updateWordSet } from "@/lib/actions/wordSet";
 
-export function WordSetEditButton({ wordSet, ...props }: React.HTMLAttributes<HTMLDivElement> & { wordSet: wordSetType }) {
+export function WordSetEditButton({ wordSet }: { wordSet: wordSetType }) {
 
     const [state, formAction, isPending] = useActionState(updateWordSet, initialState)
 
@@ -25,7 +25,7 @@ export function WordSetEditButton({ wordSet, ...props }: React.HTMLAttributes<HT
     return(
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
                 <SheetTrigger asChild>
-                    <div {...props} className="cursor-pointer aspect-square w-full h-full flex flex-col items-center justify-center border border-gray-200 rounded-lg">
+                    <div className="cursor-pointer aspect-square w-full h-full flex flex-col items-center justify-center border border-gray-200 rounded-lg shadow-sm">
                         <PencilLine className="w-1/2 h-1/2"/>
                         <div className="text-xs text-muted-foreground">
                             編集

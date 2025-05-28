@@ -1,4 +1,5 @@
 import { z } from "zod/v4"
+import { WordSchema } from "./wordSchema";
 
 export const initialState = {
     message: "",
@@ -42,3 +43,7 @@ export type wordSetType = z.infer<typeof WordSetSchema>
 
 export const CreateWordSet = WordSetSchema.omit({ id: true, is_public: true })
 export const UpdateWordSet = CreateWordSet.extend({ wordSetId: z.string().nonempty() })
+
+export const InWordsWordSet = WordSetSchema.extend({ words: z.array(WordSchema)})
+
+export type InWordsWordSetType = z.infer<typeof InWordsWordSet>

@@ -11,6 +11,9 @@ import {  initialState } from "@/lib/validators/wordSchema"
 import { useDebounce } from "use-debounce"
 import { Checkbox } from "./ui/checkbox"
 import { createDashboardWord } from "@/lib/actions/word"
+import { Plus } from "lucide-react"
+import { Sheet, SheetTrigger } from "./ui/sheet"
+import { WordSetForm } from "./WordSetForm"
 
 export function DashboardWordForm({ wordSets, ...props }: React.ComponentProps<typeof Card> & { wordSets: wordSetType[] }){
 
@@ -53,7 +56,20 @@ export function DashboardWordForm({ wordSets, ...props }: React.ComponentProps<t
     },[enText, debounced, isAutoTranslate])
 
     if(wordSets.length === 0){
-        return <></>
+        return(
+            <div>
+                <h3 className="text-xl my-2 sm:my-4">まだあなたの単語帳はありません。新しく作ってみましょう！</h3>
+                <Sheet>
+                    <SheetTrigger asChild>
+                        <div className="w-1/4 border aspect-square rounded-lg shadow-sm flex flex-col items-center justify-center">
+                            <Plus className="w-1/2 h-1/2"/>
+                            <div className="text-xs">新規作成</div>
+                        </div>
+                    </SheetTrigger>
+                    <WordSetForm/>
+                </Sheet>
+            </div>
+        )
     }
 
     return(
