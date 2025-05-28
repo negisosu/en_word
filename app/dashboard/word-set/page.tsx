@@ -1,7 +1,31 @@
-export default function Page() {
+import { MyDescription } from "@/components/MyDescription";
+import { MyTitle } from "@/components/MyTitle";
+import { WordSetList } from "@/components/WordSetList";
+import { getUserWordSets } from "@/lib/actions/wordSet";
+import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
+
+export default async function Page() {
+
+    const { userId } = await auth()
+
+    if(!userId){
+        redirect("/")
+    }
+
+    const wordSets = await getUserWordSets(userId)
+
+    console.log(wordSets)
+
     return(
         <div>
-            word-set
+            <MyTitle>
+                単語帳
+            </MyTitle>
+            <MyDescription>
+                作成した単語帳をすべて確認できます
+            </MyDescription>
+            <WordSetList wordSets={wordSets}/>
         </div>
     )
 }

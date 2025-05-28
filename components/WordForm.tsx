@@ -59,7 +59,7 @@ export function WordForm({wordSet, ...props }: React.ComponentProps<typeof Card>
                         新しい単語を追加
                     </CardTitle>
                     <CardDescription className="text-xs sm:text-sm">
-                        この単語帳にダッシュボードから単語を追加できます
+                        この単語帳に単語を追加できます
                     </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-2 sm:space-y-4">
