@@ -3,7 +3,9 @@
 import {
   Settings,
   LogOut,
-  Plus
+  Plus,
+  Home,
+  Folder
 } from "lucide-react"
 
 import {
@@ -23,10 +25,9 @@ import { wordSetType } from "@/lib/validators/wordSetSchema"
 import { Sheet, SheetTrigger } from "./ui/sheet"
 import { useState } from "react"
 import { WordSetForm } from "./WordSetForm"
+import { userType } from "@/lib/validators/userSchema"
 
-export function DashboardSidebar({ wordSets, ...props }: React.ComponentProps<typeof Sidebar> & { wordSets: wordSetType[] }) {
-
-  const [createWordSetIsOpen, setCreateWordSetIsOpen] = useState(false)
+export function DashboardSidebar({ wordSets, user, ...props }: React.ComponentProps<typeof Sidebar> & { wordSets: wordSetType[], user: userType }) {
 
   const { signOut } = useClerk()
 
@@ -35,22 +36,7 @@ export function DashboardSidebar({ wordSets, ...props }: React.ComponentProps<ty
 
       <SidebarContent>
         {/* メインナビゲーション */}
-        <SidebarGroup>
-          <SidebarGroupLabel>メニュー</SidebarGroupLabel>
-          <SidebarMenu>
-            <SidebarMenuItem>
-              <Sheet open={createWordSetIsOpen} onOpenChange={setCreateWordSetIsOpen}>
-                <SheetTrigger asChild>
-                  <SidebarMenuButton>
-                    <Plus/>
-                    <span>単語帳を作成</span>
-                  </SidebarMenuButton>
-                </SheetTrigger>
-                <WordSetForm/>
-              </Sheet>
-            </SidebarMenuItem>
-          </SidebarMenu>
-        </SidebarGroup>
+        <MyMenu/>
 
         {/* プロジェクト */}
         <SidebarGroup className="group-data-[collapsible=icon]:hidden">
@@ -99,11 +85,56 @@ export function DashboardSidebar({ wordSets, ...props }: React.ComponentProps<ty
       <SidebarFooter>
         <SidebarMenu>
           <SidebarMenuItem>
-            <UserButton/>
+            <SidebarMenuButton>
+              <div className=" -ml-2 mt-1">
+              <UserButton/>
+              </div>
+            <span className="text-lg">{user.name}</span>
+            </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>
+  )
+}
+
+function MyMenu () {
+
+  const [createWordSetIsOpen, setCreateWordSetIsOpen] = useState(false)
+
+  return(
+    <SidebarGroup>
+      <SidebarGroupLabel>メニュー</SidebarGroupLabel>
+    <SidebarMenu>
+      <SidebarMenuItem>
+        <SidebarMenuButton asChild>
+          <Link href={"/dashboard"}>
+            <Home/>
+            <span>ダッシュボード</span>
+          </Link>
+        </SidebarMenuButton>
+      </SidebarMenuItem>
+      <SidebarMenuItem>
+        <SidebarMenuButton asChild>
+          <Link href={"/dashboard/word-set"}>
+            <Folder/>
+            <span>単語帳一覧</span>
+          </Link>
+        </SidebarMenuButton>
+      </SidebarMenuItem>
+      <SidebarMenuItem className="mt-6">
+        <Sheet open={createWordSetIsOpen} onOpenChange={setCreateWordSetIsOpen}>
+          <SheetTrigger asChild>
+            <SidebarMenuButton>
+              <Plus/>
+              <span>単語帳を作成</span>
+            </SidebarMenuButton>
+          </SheetTrigger>
+          <WordSetForm/>
+        </Sheet>
+      </SidebarMenuItem>
+    </SidebarMenu>
+  </SidebarGroup>
   )
 }

@@ -65,3 +65,17 @@ export const isUserExist = async (id: string): Promise<boolean> => {
         return false
     }
 }
+
+export const getUser = async (id: string) => {
+    try{
+        const user = await prisma.user.findUnique({
+            where: {
+                id: id
+            }
+        })
+        return user
+    }catch(err){
+        console.error(err)
+        throw err
+    }
+}

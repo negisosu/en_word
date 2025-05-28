@@ -21,6 +21,23 @@ export const getUserWordSets = async (userId: string, limit: number = 100, skip:
     }
 }
 
+export const getWordSet = async (wordSetId: string, includeWord: boolean = false) => {
+    try{
+        const wordSet = await prisma.wordSet.findUnique({
+            where: {
+                id: wordSetId
+            },
+            include: {
+                words: includeWord
+            }
+        })
+        return wordSet
+    }catch(err){
+        console.error(err)
+        throw err
+    }
+}
+
 export const createWordSet = async (prevState: createWordSetState, formData: FormData) => {
     const validatedFields = CreateWordSet.safeParse({
         name: formData.get("name"),

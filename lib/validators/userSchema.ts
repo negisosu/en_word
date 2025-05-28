@@ -29,3 +29,5 @@ export const UserSchema = z.object({
 })
 
 export const CreateUser = UserSchema
+
+export type userType = z.infer<typeof UserSchema>
