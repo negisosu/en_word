@@ -26,6 +26,7 @@ import { Sheet, SheetTrigger } from "./ui/sheet"
 import { useState } from "react"
 import { WordSetForm } from "./WordSetForm"
 import { userType } from "@/lib/validators/userSchema"
+import clsx from "clsx"
 
 export function DashboardSidebar({ wordSets, user, ...props }: React.ComponentProps<typeof Sidebar> & { wordSets: wordSetType[], user: userType }) {
 
@@ -35,31 +36,13 @@ export function DashboardSidebar({ wordSets, user, ...props }: React.ComponentPr
     <Sidebar collapsible="icon" {...props}>
 
       <SidebarContent>
-        {/* メインナビゲーション */}
+        {/*メニュー */}
         <MyMenu/>
 
-        {/* プロジェクト */}
-        <SidebarGroup className="group-data-[collapsible=icon]:hidden">
-          <SidebarGroupLabel>単語帳</SidebarGroupLabel>
-          <SidebarMenu>
-            {wordSets.map((wordSet) => (
-              <SidebarMenuItem key={wordSet.id}>
-                <SidebarMenuButton asChild>
-                  <Link href={`/dashboard/word-set/${wordSet.id}`}>
-                    <span>{wordSet.name}</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            ))}
-          </SidebarMenu>
-          <SidebarGroupLabel>
-              <Link href={"/dashboard/word-set"} className="w-full py-2 rounded-lg hover:bg-gray-100">
-                <span>もっと見る→</span>
-              </Link>
-          </SidebarGroupLabel>
-        </SidebarGroup>
+        {/*単語帳 */}
+        <MyWordSet wordSets={wordSets}/>
 
-        {/* 設定 */}
+        {/* その他 */}
         <SidebarGroup>
           <SidebarGroupLabel>その他</SidebarGroupLabel>
           <SidebarMenu>
@@ -135,6 +118,35 @@ function MyMenu () {
         </Sheet>
       </SidebarMenuItem>
     </SidebarMenu>
+  </SidebarGroup>
+  )
+}
+
+function MyWordSet({ wordSets }: { wordSets: wordSetType[] }) {
+  return(
+    <SidebarGroup
+    className={clsx(
+      wordSets.length === 0 && "hidden",
+      "group-data-[collapsible=icon]:hidden"
+    )}
+    >
+    <SidebarGroupLabel>単語帳</SidebarGroupLabel>
+    <SidebarMenu>
+      {wordSets.map((wordSet) => (
+        <SidebarMenuItem key={wordSet.id}>
+          <SidebarMenuButton asChild>
+            <Link href={`/dashboard/word-set/${wordSet.id}`}>
+              <span>{wordSet.name}</span>
+            </Link>
+          </SidebarMenuButton>
+        </SidebarMenuItem>
+      ))}
+    </SidebarMenu>
+    <SidebarGroupLabel>
+        <Link href={"/dashboard/word-set"} className="w-full py-2 rounded-lg hover:bg-gray-100">
+          <span>もっと見る→</span>
+        </Link>
+    </SidebarGroupLabel>
   </SidebarGroup>
   )
 }

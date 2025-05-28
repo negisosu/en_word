@@ -52,6 +52,10 @@ export function DashboardWordForm({ wordSets, ...props }: React.ComponentProps<t
         }
     },[enText, debounced, isAutoTranslate])
 
+    if(wordSets.length === 0){
+        return <></>
+    }
+
     return(
         <form action={formAction}>
             <Card {...props}>

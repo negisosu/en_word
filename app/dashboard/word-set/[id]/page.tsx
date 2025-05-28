@@ -3,6 +3,7 @@ import { MySubTitle } from "@/components/MySubTitle"
 import { MyTitle } from "@/components/MyTitle"
 import { WordForm } from "@/components/WordForm"
 import { WordList } from "@/components/WordList"
+import { WordSetButtons } from "@/components/WordSetButtons"
 import { getWordSet } from "@/lib/actions/wordSet"
 import { auth } from "@clerk/nextjs/server"
 import { notFound } from "next/navigation"
@@ -32,6 +33,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
             <MyDescription>
                 {wordSet.description}
             </MyDescription>
+            <WordSetButtons wordSet={wordSet}/>
             <WordForm wordSet={wordSet}/>
             <MySubTitle>
                 単語一覧

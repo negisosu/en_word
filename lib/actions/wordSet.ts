@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache"
 import { prisma } from "../prisma"
-import { CreateWordSet, createWordSetState } from "../validators/wordSetSchema"
+import { CreateWordSet, createWordSetState, UpdateWordSet } from "../validators/wordSetSchema"
 import { redirect } from "next/navigation"
 
 export const getUserWordSets = async (userId: string, limit: number = 100, skip: number = 1) => {
@@ -68,4 +68,59 @@ export const createWordSet = async (prevState: createWordSetState, formData: For
 
     revalidatePath(`/dashboard/word-set/${wordSetId}`)
     redirect(`/dashboard/word-set/${wordSetId}`)
+}
+
+export const updateWordSet = async (prevState: createWordSetState, formData: FormData) => {
+    const validatedFields = UpdateWordSet.safeParse({
+        name: formData.get("name"),
+        description: formData.get("description"),
+        userId: formData.get("userId"),
+        wordSetId: formData.get("wordSetId")
+    })
+
+    if(!validatedFields.success){
+        return {
+            errors: validatedFields.error.issues,
+            message: "単語帳の更新に失敗しました"
+        }
+    }
+
+    const { name, description, userId, wordSetId } = validatedFields.data
+
+    try{
+        await prisma.wordSet.update({
+            where: {
+                id: wordSetId
+            },
+            data: {
+                name: name,
+                description: description,
+                userId: userId
+            }
+        })
+    }catch(err){
+        console.error(err)
+        return {
+            message: "単語帳の更新に失敗しました"
+        }
+    }
+
+    revalidatePath(`/dashboard/word-set/${wordSetId}`)
+    redirect(`/dashboard/word-set/${wordSetId}`)
+}
+
+export const deleteWordSet = async (wordSetId: string) => {
+    try{
+        await prisma.wordSet.delete({
+            where: {
+                id: wordSetId
+            }
+        })
+    }catch(err){
+        console.error(err)
+        throw err
+    }
+
+    revalidatePath("/dashboard")
+    redirect("/dashboard")
 }

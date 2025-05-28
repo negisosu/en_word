@@ -41,3 +41,4 @@ export const WordSetSchema = z.object({
 export type wordSetType = z.infer<typeof WordSetSchema>
 
 export const CreateWordSet = WordSetSchema.omit({ id: true, is_public: true })
+export const UpdateWordSet = CreateWordSet.extend({ wordSetId: z.string().nonempty() })

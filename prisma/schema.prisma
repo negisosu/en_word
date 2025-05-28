@@ -39,5 +39,5 @@ model Word {
   en String
   wordSetId String
 
-  wordSet WordSet @relation(fields: [wordSetId], references: [id])
+  wordSet WordSet @relation(fields: [wordSetId], references: [id], onDelete: Cascade)
 }
