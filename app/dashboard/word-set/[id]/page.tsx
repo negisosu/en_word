@@ -1,12 +1,15 @@
 import { MyDescription } from "@/components/myTemplates/MyDescription"
 import { MySubTitle } from "@/components/myTemplates/MySubTitle"
 import { MyTitle } from "@/components/myTemplates/MyTitle"
-import { WordForm } from "@/components/WordForm"
+import { DashboardWordFormSkeleton } from "@/components/skeletons/DashboardWordFormSkeleton"
+import { WordSetButtonsSkeleton } from "@/components/skeletons/WordSetButtonsSkeleton"
 import { WordList } from "@/components/wordSet/WordList"
 import { WordSetButtons } from "@/components/wordSet/WordSetButtons"
+import { WordFormWrapper } from "@/components/wrappers/WordFormWrapper"
 import { getWordSet } from "@/lib/actions/wordSet"
 import { auth } from "@clerk/nextjs/server"
 import { notFound } from "next/navigation"
+import { Suspense } from "react"
 
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params
@@ -33,8 +36,12 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
             <MyDescription>
                 {wordSet.description}
             </MyDescription>
-            <WordSetButtons wordSet={wordSet}/>
-            <WordForm wordSet={wordSet}/>
+            <Suspense fallback={<WordSetButtonsSkeleton/>}>
+                <WordSetButtons wordSetId={id}/>
+            </Suspense>
+            <Suspense fallback={<DashboardWordFormSkeleton/>}>
+                <WordFormWrapper wordSetId={id}/>
+            </Suspense>
             <MySubTitle>
                 単語一覧
             </MySubTitle>

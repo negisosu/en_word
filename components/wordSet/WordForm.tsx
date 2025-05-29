@@ -1,13 +1,13 @@
 "use client"
 
-import { Button } from "./ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./ui/card"
-import { Input } from "./ui/input"
-import { Label } from "./ui/label"
+import { Button } from "../ui/button"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../ui/card"
+import { Input } from "../ui/input"
+import { Label } from "../ui/label"
 import { useActionState, useEffect, useState } from "react"
 import {  initialState } from "@/lib/validators/wordSchema"
 import { useDebounce } from "use-debounce"
-import { Checkbox } from "./ui/checkbox"
+import { Checkbox } from "../ui/checkbox"
 import { createWord } from "@/lib/actions/word"
 import { wordSetType } from "@/lib/validators/wordSetSchema"
 
