@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache"
 import { prisma } from "../prisma"
 import { CreateWord, createWordState, createWordType } from "../validators/wordSchema"
 import { redirect } from "next/navigation"
+import { auth } from "@clerk/nextjs/server"
 
 export const createDashboardWord = async (prevState: createWordState, formData: FormData) => {
     const validatedFields = CreateWord.safeParse({
@@ -38,7 +39,7 @@ export const createWord = async (prevState: createWordState, formData: FormData)
             message: "単語の作成に失敗しました。"
         }
     }
-    
+
     createWordBackground(validatedFields.data)
 
     revalidatePath(`/dashboard/word-set/${validatedFields.data.wordSetId}`)
@@ -47,15 +48,31 @@ export const createWord = async (prevState: createWordState, formData: FormData)
 
 export const createWordBackground = async (data: createWordType) => {
 
+    const session = await auth()
+
+    if(!session.userId){
+        return new Error("単語の作成に失敗しました。")
+    }
+
     try{
         await prisma.word.create({
             data: data
         })
+        // const wordSet = await prisma.wordSet.findUnique({
+        //     where: {
+        //         id: word.wordSetId
+        //     }
+        // })
+        // await prisma.activityLog.create({
+        //     data: {
+        //         url: `/dashboard/word-set/${word.wordSetId}`,
+        //         body: `${wordSet?.name}に${word.en}を追加しました`,
+        //         userId: session.userId
+        //     }
+        // })
     }catch(err){
         console.error(err)
-        return {
-            message: "単語の作成に失敗しました"
-        }
+        throw err
     }
 }
 

@@ -20,6 +20,7 @@ model User {
   email String
 
   wordSets WordSet[]
+  activityLogs ActivityLog[]
 }
 
 model WordSet {
@@ -27,6 +28,7 @@ model WordSet {
   name String
   description String @default("")
   is_public Boolean @default(false)
+  createdAt DateTime @default(now())
   userId String
 
   words Word[]
@@ -40,4 +42,14 @@ model Word {
   wordSetId String
 
   wordSet WordSet @relation(fields: [wordSetId], references: [id], onDelete: Cascade)
+}
+
+model ActivityLog {
+  id String @id @default(cuid())
+  url String?
+  body String
+  createdAt DateTime @default(now())
+  userId String
+
+  user User @relation(fields: [userId], references: [id])
 }

@@ -3,7 +3,7 @@
 import { prisma } from "../prisma";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { CreateUser, createUserState } from "../validators/userSchema";
+import { CreateUser, createUserState, userType } from "../validators/userSchema";
 
 export const createUser = async (prevState: createUserState, formData: FormData) => {
     const validatedFields = CreateUser.safeParse({
@@ -19,20 +19,28 @@ export const createUser = async (prevState: createUserState, formData: FormData)
         }
     }
 
-    try{
-        const user = await prisma.user.create({
-            data: validatedFields.data
-        })
-        createDefaultWordSet(user.id)
-    }catch(err){
-        console.error(err)
-        return {
-            message: "ユーザーの作成に失敗しました"
-        }
-    }
+    createUserBackground(validatedFields.data)
 
     revalidatePath("/dashboard")
     redirect("/dashboard")
+}
+
+export const createUserBackground = async (data: userType) => {
+    try{
+        await prisma.user.create({
+            data: data
+        })
+        // await prisma.activityLog.create({
+        //     data: {
+        //         url: "/dashboard/guide",
+        //         body: "ユーザーを作成しました！使い方を見てみましょう！",
+        //         userId: user.id
+        //     }
+        // })
+    }catch(err){
+        console.error(err)
+        throw err
+    }
 }
 
 export const createDefaultWordSet = async (userId: string) => {
