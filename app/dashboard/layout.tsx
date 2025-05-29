@@ -7,8 +7,6 @@ import { currentUser } from "@clerk/nextjs/server"
 import { redirect } from "next/navigation"
 import { isUserExist } from "@/lib/actions/user"
 
-export const experimental_ppr = true
-
 export default async function DashboardLayout({
   children,
 }: {

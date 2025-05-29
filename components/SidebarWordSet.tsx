@@ -14,8 +14,6 @@ export async function SidebarWordSet() {
         redirect("/")
     }
 
-    await new Promise((resolve) => setTimeout(resolve, 3000));
-
     const wordSets = await getUserWordSets(userId, 5)
     if(!wordSets){
         redirect("/")
