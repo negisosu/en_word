@@ -4,16 +4,32 @@ import { Badge } from "@/components/ui/badge"
 import { Check } from "lucide-react"
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs"
 import Link from "next/link"
+import Image from "next/image"
+
+const lpFunction = [
+    {
+        title: "単語をすぐに追加",
+        description: "覚えたい単語をダッシュボードからすぐに登録できます。"
+    },
+    {
+        title: "英語を自動翻訳",
+        description: "英語を入力すれば自動で翻訳され、翻訳結果も登録されます。"
+    },
+    {
+        title: "英語を覚える",
+        description: "もちろん英単語帳というからには現実のように単語帳として使えます。"
+    }
+]
 
 
 export default function LP() {
     return (
-        <div className="min-h-screen bg-background">
+        <div className="min-h-screen w-full bg-background">
             {/* Header */}
             <header className="border-b">
                 <div className="container mx-auto px-4 py-4 flex items-center justify-between">
                     <div className="text-2xl font-bold">
-                        ロゴ
+                        英単語帳
                     </div>
                     <SignedIn>
                             <UserButton/>
@@ -36,7 +52,7 @@ export default function LP() {
                     <Badge variant="secondary" className="mb-4">
                         2025/5/29 リリース
                     </Badge>
-                    <h1 className="text-4xl md:text-6xl font-bold mb-6 max-w-4xl mx-auto">簡単なUIの単語帳</h1>
+                    <h1 className="text-4xl md:text-6xl font-bold mb-6 max-w-4xl mx-auto">簡単なUIの英単語帳</h1>
                     <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
                         覚えたい単語を見つけたとき、すぐに登録できます。
                     </p>
@@ -56,10 +72,12 @@ export default function LP() {
                     </div>
                     <div className="mt-12">
                         <div className="bg-muted rounded-lg p-8 max-w-4xl mx-auto">
-                            <p className="text-muted-foreground mb-4">ここに製品画像やデモ動画を配置</p>
-                            <div className="aspect-video bg-background rounded border-2 border-dashed border-muted-foreground/25 flex items-center justify-center">
-                                <p className="text-muted-foreground">画像・動画エリア</p>
-                            </div>
+                            <Image
+                            src={"/lp-image.png"}
+                            alt=""
+                            width={10000}
+                            height={10000}
+                            />
                         </div>
                     </div>
                 </div>
@@ -70,18 +88,18 @@ export default function LP() {
                 <div className="container mx-auto px-4">
                     <div className="text-center mb-16">
                         <h2 className="text-3xl md:text-4xl font-bold mb-4">主な機能</h2>
-                        <p className="text-xl text-muted-foreground max-w-2xl mx-auto">ここに機能の概要説明を入力してください</p>
+                        <p className="text-xl text-muted-foreground max-w-2xl mx-auto">覚えたい単語を見つけたらダッシュボードからすぐに気軽に登録することができます。</p>
                     </div>
                     <div className="grid md:grid-cols-3 gap-8">
-                        {[1, 2, 3].map((i) => (
+                        {lpFunction.map((func, i) => (
                         <Card key={i}>
                             <CardHeader>
                             <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
                                 <Check className="h-6 w-6 text-primary" />
                             </div>
-                            <CardTitle>機能タイトル {i}</CardTitle>
+                            <CardTitle>{func.title}</CardTitle>
                             <CardDescription>
-                                ここに機能の説明を入力してください。ユーザーにとってのメリットを明確に伝えましょう。
+                                {func.description}
                             </CardDescription>
                             </CardHeader>
                         </Card>
