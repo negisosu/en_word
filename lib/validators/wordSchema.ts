@@ -2,8 +2,8 @@ import { z } from "zod/v4"
 
 export const initialState = {
     message: "",
-    errors: undefined
-} as { message: string; errors?: undefined }
+    errors: [] as z.ZodIssue[]
+} as { message: string; errors: z.ZodIssue[] }
 
 export type createWordState = {
     errors?: {
