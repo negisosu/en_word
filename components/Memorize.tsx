@@ -14,7 +14,7 @@ export function Memorize({ wordSet, randomWords }: { wordSet: wordSetType, rando
     const [isJa, setIsJa] = useState(false)
 
     useEffect(() => {
-        if(randomWords.length === currentIndex + 1){
+        if(randomWords.length <= currentIndex){
             redirect(`/dashboard/word-set/${wordSet.id}`)
         }
     },[wordSet,randomWords,currentIndex])
