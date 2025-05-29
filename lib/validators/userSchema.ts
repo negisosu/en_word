@@ -2,7 +2,7 @@ import { z } from "zod/v4"
 
 export const initialState = {
     message: "",
-    errors: undefined
+    errors: [] as z.ZodIssue[]
 }
 
 export type createUserState = {
