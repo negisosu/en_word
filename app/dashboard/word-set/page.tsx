@@ -1,6 +1,6 @@
-import { MyDescription } from "@/components/MyDescription";
-import { MyTitle } from "@/components/MyTitle";
-import { WordSetList } from "@/components/WordSetList";
+import { MyDescription } from "@/components/myTemplates/MyDescription";
+import { MyTitle } from "@/components/myTemplates/MyTitle";
+import { WordSetList } from "@/components/wordSet/WordSetList";
 import { getUserWordSets } from "@/lib/actions/wordSet";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";

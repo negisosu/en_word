@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { SidebarGroup, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "./ui/sidebar"
+import { SidebarGroup, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar"
 import { LogOut, Settings } from "lucide-react"
 import { useClerk } from "@clerk/nextjs"
 

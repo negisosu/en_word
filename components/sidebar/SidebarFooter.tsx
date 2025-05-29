@@ -1,5 +1,5 @@
 import { UserButton } from "@clerk/nextjs";
-import { SidebarFooter, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "./ui/sidebar";
+import { SidebarFooter, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar";
 
 export function SidebarMyFooter() {
     return(

@@ -1,12 +1,12 @@
 "use client"
 
 import { initialState, wordSetType } from "@/lib/validators/wordSetSchema";
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "./ui/sheet";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { useActionState, useState } from "react";
-import { Label } from "./ui/label";
-import { Input } from "./ui/input";
-import { Textarea } from "./ui/textarea";
-import { Button } from "./ui/button";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
 import { PencilLine } from "lucide-react";
 import { deleteWordSet, updateWordSet } from "@/lib/actions/wordSet";
 

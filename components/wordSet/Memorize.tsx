@@ -1,10 +1,10 @@
 "use client"
 
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 import React, {  useEffect, useState } from "react";
 import clsx from "clsx";
 import { wordType } from "@/lib/validators/wordSchema";
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { redirect } from "next/navigation";
 import { wordSetType } from "@/lib/validators/wordSetSchema";
 

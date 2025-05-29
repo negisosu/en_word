@@ -1,7 +1,7 @@
 import type React from "react"
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import { Separator } from "@/components/ui/separator"
-import { DashboardSidebar } from "@/components/DashboardSidebar"
+import { DashboardSidebar } from "@/components/sidebar/DashboardSidebar"
 import { MyBreadcrumb } from "@/components/MyBreadcrumb"
 import { currentUser } from "@clerk/nextjs/server"
 import { redirect } from "next/navigation"

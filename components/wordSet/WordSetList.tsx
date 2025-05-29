@@ -1,9 +1,9 @@
 "use client"
 
 import { wordSetType } from "@/lib/validators/wordSetSchema";
-import { MySubTitle } from "./MySubTitle";
+import { MySubTitle } from "@/components/myTemplates/MySubTitle";
 import Link from "next/link";
-import { Card, CardDescription, CardHeader, CardTitle } from "./ui/card";
+import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 export function WordSetList({ wordSets }: { wordSets: wordSetType[]}) {
 

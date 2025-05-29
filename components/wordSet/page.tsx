@@ -1,6 +1,6 @@
-import { Memorize } from "@/components/Memorize";
-import { MyDescription } from "@/components/MyDescription";
-import { MyTitle } from "@/components/MyTitle";
+import { Memorize } from "@/components/wordSet/Memorize";
+import { MyDescription } from "@/components/myTemplates/MyDescription";
+import { MyTitle } from "@/components/myTemplates/MyTitle";
 import { getRandomWords } from "@/lib/actions/word";
 import { getWordSet } from "@/lib/actions/wordSet";
 

@@ -10,7 +10,7 @@ import { SidebarWordSet } from "./SidebarWordSet"
 import { SidebarOther } from "./SidebarOther"
 import { SidebarMyMenu } from "./SidebarMenu"
 import { SidebarMyFooter } from "./SidebarFooter"
-import { SidebarWordSetSkeleton } from "./skeletons/SidebarWordSetSkeleton"
+import { SidebarWordSetSkeleton } from "@/components/skeletons/SidebarWordSetSkeleton"
 
 export async function DashboardSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 

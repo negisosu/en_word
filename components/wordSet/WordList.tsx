@@ -1,7 +1,7 @@
 "use client"
 
 import { wordType } from "@/lib/validators/wordSchema";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 import { Trash2 } from "lucide-react";
 import { deleteWord } from "@/lib/actions/word";
 import { wordSetType } from "@/lib/validators/wordSetSchema";

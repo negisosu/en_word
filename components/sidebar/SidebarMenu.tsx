@@ -1,11 +1,11 @@
 "use client"
 
 import { useState } from "react"
-import { SidebarGroup, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "./ui/sidebar"
+import { SidebarGroup, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar"
 import Link from "next/link"
 import { Folder, Home, Plus } from "lucide-react"
-import { Sheet, SheetTrigger } from "./ui/sheet"
-import { WordSetForm } from "./WordSetForm"
+import { Sheet, SheetTrigger } from "@/components/ui/sheet"
+import { WordSetForm } from "../WordSetForm"
 
 export function SidebarMyMenu () {
 

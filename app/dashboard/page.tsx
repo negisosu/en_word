@@ -1,5 +1,5 @@
-import { MyDescription } from "@/components/MyDescription";
-import { MyTitle } from "@/components/MyTitle";
+import { MyDescription } from "@/components/myTemplates/MyDescription";
+import { MyTitle } from "@/components/myTemplates/MyTitle";
 import { DashboardWordFormSkeleton } from "@/components/skeletons/DashboardWordFormSkeleton";
 import { DashboardWordFormWrapper } from "@/components/wrappers/DashboardWordFormWrapper";
 import { Suspense } from "react";

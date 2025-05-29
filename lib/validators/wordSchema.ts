@@ -40,3 +40,5 @@ export const WordSchema = z.object({
 export type wordType = z.infer<typeof WordSchema>
 
 export const CreateWord = WordSchema.omit({ id: true })
+
+export type createWordType = z.infer<typeof CreateWord>

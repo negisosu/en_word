@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache"
 import { prisma } from "../prisma"
-import { CreateWord, createWordState } from "../validators/wordSchema"
+import { CreateWord, createWordState, createWordType } from "../validators/wordSchema"
 import { redirect } from "next/navigation"
 
 export const createDashboardWord = async (prevState: createWordState, formData: FormData) => {
@@ -19,16 +19,7 @@ export const createDashboardWord = async (prevState: createWordState, formData: 
         }
     }
 
-    try{
-        await prisma.word.create({
-            data: validatedFields.data
-        })
-    }catch(err){
-        console.error(err)
-        return {
-            message: "単語の作成に失敗しました"
-        }
-    }
+    createWordBackground(validatedFields.data)
 
     revalidatePath("/dashboard")
     redirect("/dashboard")
@@ -48,9 +39,17 @@ export const createWord = async (prevState: createWordState, formData: FormData)
         }
     }
     
+    createWordBackground(validatedFields.data)
+
+    revalidatePath(`/dashboard/word-set/${validatedFields.data.wordSetId}`)
+    redirect(`/dashboard/word-set/${validatedFields.data.wordSetId}`)
+}
+
+export const createWordBackground = async (data: createWordType) => {
+
     try{
         await prisma.word.create({
-            data: validatedFields.data
+            data: data
         })
     }catch(err){
         console.error(err)
@@ -58,9 +57,6 @@ export const createWord = async (prevState: createWordState, formData: FormData)
             message: "単語の作成に失敗しました"
         }
     }
-
-    revalidatePath(`/dashboard/word-set/${validatedFields.data.wordSetId}`)
-    redirect(`/dashboard/word-set/${validatedFields.data.wordSetId}`)
 }
 
 export const deleteWord = async (wordId: string) => {
