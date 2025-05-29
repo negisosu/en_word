@@ -12,6 +12,8 @@ export async function DashboardWordFormWrapper() {
         redirect("/")
     }
 
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+
     const wordSets = await getUserWordSets(userId)
     if(!wordSets){
         redirect("/")

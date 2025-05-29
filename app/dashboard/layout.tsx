@@ -5,8 +5,9 @@ import { DashboardSidebar } from "@/components/DashboardSidebar"
 import { MyBreadcrumb } from "@/components/MyBreadcrumb"
 import { currentUser } from "@clerk/nextjs/server"
 import { redirect } from "next/navigation"
-import { getUser, isUserExist } from "@/lib/actions/user"
-import { getUserWordSets } from "@/lib/actions/wordSet"
+import { isUserExist } from "@/lib/actions/user"
+
+export const experimental_ppr = true
 
 export default async function DashboardLayout({
   children,
@@ -25,17 +26,9 @@ export default async function DashboardLayout({
     redirect("/onboarding")
   }
 
-  const dbUser = await getUser(clerkUser.id)
-  if(!dbUser){
-    redirect("/")
-  }
-
-  //limit: 5
-  const wordSets = await getUserWordSets(clerkUser.id, 5)
-
   return (
     <SidebarProvider>
-      <DashboardSidebar wordSets={wordSets} user={dbUser}/>
+      <DashboardSidebar />
       <SidebarInset>
         <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
           <div className="flex items-center gap-2 px-4">
