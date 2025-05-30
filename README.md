@@ -116,7 +116,7 @@ erDiagram
 
 ## サイトマップ
 
-![sitemap](https://github.com/user-attachments/files/20520498/default.pdf)
+![sitemap](https://github.com/user-attachments/assets/49ef3273-12f8-42d2-a52b-caa8bf6d7436)
 
 ## 今後の修正・改善・追加
 
