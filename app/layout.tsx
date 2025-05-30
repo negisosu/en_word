@@ -25,7 +25,13 @@ export default function RootLayout({
 }>) {
 
   return (
-    <ClerkProvider>
+    <ClerkProvider 
+      domain="en-word.negisosu.com"
+      publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
+      routerPush={(to) => window.location.href = to}
+      routerReplace={(to) => window.location.replace(to)}
+      isSatellite={false}
+    >
       <html lang="en">
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
