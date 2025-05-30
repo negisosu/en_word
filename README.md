@@ -23,11 +23,25 @@
 
 新しく覚えたい英単語を見つけたとき、ネストの深いところに行かずに、一番上のダッシュボードからすぐに登録できるような英単語帳アプリケーションです。
 
+![dashboardCreateWord](https://github.com/user-attachments/assets/74c9237c-46c1-4c93-ba22-0faf1d6cbd10)
+
 ## その他機能
 
 ### 英語の自動翻訳
 
 単語登録のフォームで英語を入力してもらうと、日本語に自動で翻訳する。また、文面によって覚えたい覚え方がある時のために、自動翻訳をOFFにすることも可能
+
+### 単語帳の作成・編集・削除
+
+単語帳のタイトルや説明を好きなときに編集・削除可能。単語帳を削除したとき、自動でその単語帳に登録されていた単語も削除される。
+
+![createWordSet](https://github.com/user-attachments/assets/d175d7ff-b565-4462-be8b-9c5ae258f94b)
+
+### 単語帳に単語を追加・削除
+
+ダッシュボード上では単語帳の指定が可能、単語帳それぞれのページではその単語帳に単語を追加。
+
+![createWord](https://github.com/user-attachments/assets/9914af99-3b66-4014-a601-8502a6819588)
 
 ### 単語帳モード
 
@@ -35,15 +49,13 @@
 
 2025/5/30時点：英語→日本語モードしかないため、日本語→英語モードも開発中
 
-### 単語帳の編集・削除
-
-単語帳のタイトルや説明を好きなときに編集・削除可能。単語帳を削除したとき、自動でその単語帳に登録されていた単語も削除される。
+![memorize](https://github.com/user-attachments/assets/63891d54-126d-4da9-94c6-400021c33067)
 
 ### ローディングUI
 
 ロード時間を削減するために情報取得を行うコンポーネントにローディングUIを適用
 
-![image](https://github.com/user-attachments/assets/bf691576-5196-4c7d-a20b-0cb2bc247176)
+![skeleton](https://github.com/user-attachments/assets/bf691576-5196-4c7d-a20b-0cb2bc247176)
 
 ## 使用技術
 
