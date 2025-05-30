@@ -25,12 +25,8 @@ export default function RootLayout({
 }>) {
 
   return (
-    <ClerkProvider 
-      domain="en-word.negisosu.com"
-      publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
-      routerPush={(to) => window.location.href = to}
-      routerReplace={(to) => window.location.replace(to)}
-      isSatellite={false}
+    <ClerkProvider
+    allowedRedirectOrigins={["https://en-word.negisosu.com"]}
     >
       <html lang="en">
         <body
