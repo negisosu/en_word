@@ -114,6 +114,10 @@ erDiagram
 "ActivityLog" }o--|| "User" : user
 ```
 
+## サイトマップ
+
+![sitemap](https://github.com/user-attachments/files/20520498/default.pdf)
+
 ## 今後の修正・改善・追加
 
 ### Wordの追加処理の改善
