@@ -10,9 +10,11 @@ import { useDebounce } from "use-debounce"
 import { Checkbox } from "../ui/checkbox"
 import { createWord } from "@/lib/actions/word"
 import { wordSetType } from "@/lib/validators/wordSetSchema"
+import { useRouter } from "next/navigation"
 
 export function WordForm({wordSet, ...props }: React.ComponentProps<typeof Card> & { wordSet: wordSetType }){
 
+    const router = useRouter()
     const [state, formAction, isPending] = useActionState(createWord, initialState)
     const [isAutoTranslate, setIsAutoTranslate] = useState<boolean>(true)
     const [enText, setEnText] = useState("")
@@ -50,6 +52,14 @@ export function WordForm({wordSet, ...props }: React.ComponentProps<typeof Card>
             handleTranslate()
         }
     },[enText, debounced, isAutoTranslate])
+
+    useEffect(() => {
+        if(state.success && !isPending){
+            setEnText("")
+            setJaText("")
+            router.refresh()
+        }
+    },[state.success, isPending, router])
 
     return(
         <form action={formAction}>

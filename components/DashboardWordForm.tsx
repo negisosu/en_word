@@ -55,6 +55,13 @@ export function DashboardWordForm({ wordSets }: { wordSets: wordSetType[] }){
         }
     },[enText, debounced, isAutoTranslate])
 
+    useEffect(() => {
+        if(state.success && !isPending){
+            setEnText("")
+            setJaText("")
+        }
+    },[state.success, isPending])
+
     if(wordSets.length === 0){
         return(
             <div>

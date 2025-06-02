@@ -3,7 +3,6 @@
 import { revalidatePath } from "next/cache"
 import { prisma } from "../prisma"
 import { CreateWord, createWordState, createWordType } from "../validators/wordSchema"
-import { redirect } from "next/navigation"
 import { auth } from "@clerk/nextjs/server"
 
 export const createDashboardWord = async (prevState: createWordState, formData: FormData) => {
@@ -22,8 +21,12 @@ export const createDashboardWord = async (prevState: createWordState, formData: 
 
     createWordBackground(validatedFields.data)
 
-    revalidatePath("/dashboard")
-    redirect("/dashboard")
+    revalidatePath(`/dashboard/word-set/${validatedFields.data.wordSetId}`)
+
+    return {
+        success: true,
+        message: "単語の作成に成功しました。"
+    }
 }
 
 export const createWord = async (prevState: createWordState, formData: FormData) => {
@@ -43,7 +46,11 @@ export const createWord = async (prevState: createWordState, formData: FormData)
     createWordBackground(validatedFields.data)
 
     revalidatePath(`/dashboard/word-set/${validatedFields.data.wordSetId}`)
-    redirect(`/dashboard/word-set/${validatedFields.data.wordSetId}`)
+
+    return {
+        success: true,
+        message: "単語の作成に成功しました。"
+    }
 }
 
 export const createWordBackground = async (data: createWordType) => {
