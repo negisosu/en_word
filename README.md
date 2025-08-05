@@ -120,7 +120,7 @@ erDiagram
 
 ## 今後の修正・改善・追加
 
-### Wordの追加処理の改善
+### ~~Wordの追加処理の改善~~ <strong>解決済</strong>
 
 現在のWordの追加方法は
 
