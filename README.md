@@ -1,5 +1,7 @@
 # en_word
 
+> [!CAUTION]
+> 使用していた認証ライブラリの`Clerk`の仕様が代わり、修正していないため、現在機能していない。
 ## URL
 
 - サイト：<https://en-word.negisosu.com>
